@@ -22,32 +22,6 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
           sh "cd trucks"
           sh "mvn clean package -Dmaven.test.skip=true"
       }
-      """
-      // 第三步
-      stage('构建镜像'){
-          withCredentials([usernamePassword(credentialsId: "${docker_registry_auth}", passwordVariable: 'password', usernameVariable: 'username')]) {
-            sh """
-              echo '
-                FROM lizhenliang/tomcat 
-                RUN rm -rf /usr/local/tomcat/webapps/*
-                ADD target/*.war /usr/local/tomcat/webapps/ROOT.war 
-              ' > Dockerfile
-              ls 
-              ls target
-              docker build -t ${image_name} .
-              docker login -u ${username} -p '${password}' ${registry}
-              docker push ${image_name}
-            """
-            }
-      }
-      // 第四步
-      stage('部署到K8S平台'){
-          sh """
-          sed -i 's#\$IMAGE_NAME#${image_name}#' deploy.yml
-          sed -i 's#\$SECRET_NAME#${secret_name}#' deploy.yml
-          """
-          kubernetesDeploy configs: 'deploy.yml', kubeconfigId: "${k8s_auth}"
-      }
-      """
+      
   }
 }
