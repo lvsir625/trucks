@@ -25,6 +25,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       stage('构件镜像并推送到仓库'){
           sh "docker build -t tomcat-test ."
           sh "echo '推送省略..'"
+          SH "sleep 300"
       }
       
       stage('部署tomcat到k8s'){
