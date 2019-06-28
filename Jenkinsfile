@@ -19,7 +19,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       }
       // 第二步
       stage('代码编译'){
-          sh "cd trucks"
+          sh "pwd"
           sh "mvn clean package -Dmaven.test.skip=true"
       }
       
