@@ -1,0 +1,47 @@
+apiVersion: extensions/v1beta1 
+kind: Deployment
+metadata:
+  name: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tomcat-test
+  template:
+    metadata:
+      labels:
+        app: tomcat-test
+    spec:
+      containers:
+      - name: tomcat-test 
+        image: tomcat-test 
+        ports:
+        - containerPort: 8080
+          name: web
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          failureThreshold: 12
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          failureThreshold: 12
+----------------------
+apiVersion: v1
+kind: Service
+metadata:
+  name: tomcat-test
+spec:
+  type: NodePort
+  ports: 
+  - port: 8080
+    nodePort: 31001
+    targetPort: 8080
+  selector:
+    name: tomcat-test
