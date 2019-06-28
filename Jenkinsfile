@@ -15,7 +15,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
   node("jenkins-slave"){
       // 第一步
       stage('拉取代码'){
-         sh "git clone https://github.com/lvsir625/trucks.git"
+         checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/lvsir625/trucks.git']]])
       }
       // 第二步
       stage('代码编译'){
