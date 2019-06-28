@@ -15,6 +15,7 @@ spec:
       containers:
       - name: tomcat-test 
         image: tomcat-test 
+        imagePullPolicy: Never  
         ports:
         - containerPort: 8080
           name: web
