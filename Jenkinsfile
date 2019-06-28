@@ -23,7 +23,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       }
       
       stage('构件镜像'){
-          sh "dokcer build -t tomcat-test ."
+          sh "docker build -t tomcat-test ."
       }
       
   }
