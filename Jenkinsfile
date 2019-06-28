@@ -19,7 +19,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       }
       // 第二步
       stage('代码编译'){
-          sh "pwd"
+          sh "sleep 100"
           sh "mvn clean package -Dmaven.test.skip=true"
       }
       
