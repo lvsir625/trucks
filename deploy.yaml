@@ -4,13 +4,10 @@ metadata:
   name: tomcat-test
 spec:
   replicas: 1
-  selector:
-    matchLabels:
-      app: tomcat-test
   template:
     metadata:
       labels:
-        app: tomcat-test
+        name: tomcat-test
     spec:
       containers:
       - name: tomcat-test 
