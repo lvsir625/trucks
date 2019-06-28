@@ -6,7 +6,7 @@ spec:
   type: NodePort
   ports: 
   - port: 8080
-    nodePort: 31001
+    nodePort: 32667
     targetPort: 8080
   selector:
     name: tomcat-test
