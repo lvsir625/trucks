@@ -29,6 +29,7 @@ podTemplate(label: 'jenkins-slave', cloud: 'kubernetes', containers: [
       
       stage('部署tomcat到k8s'){
           sh "kubectl apply -f deploy.yaml"
+          sh "kubectl apply -f svc.yaml"
       }
   }
 }
