@@ -1,2 +1,3 @@
 #!/bin/bash
-mvn clean package
+cd trucks
+/usr/bin/mvn clean package
